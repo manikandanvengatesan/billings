@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Maha Foundation</title>
+
+        <!-- Jquery js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Bootstrap css -->
+        <link rel="stylesheet" href="{{ asset('libs/bootstrap-3.3.6-dist/css/bootstrap.min.css') }}" />
+        <script src="{{ asset('libs/bootstrap-3.3.6-dist/js/bootstrap.min.js') }}"></script>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ asset('libs/font-awesome-4.6.3/css/font-awesome.min.css') }}" />
+        <!-- Local css -->
+        <link href="{{ asset('css/header.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/footer.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
+        <!-- Datatable -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function() {
+                var i = 1;
+                $("#add_row").click(function() {
+                    $('#addr' + i).html("<td>" + (i + 1) + "</td><td><input type='text' class='form-control' name='description" + i + "' value=''></td><td><input type='text' class='form-control' name='unit" + i + "' value=''></td><td><input type='text' class='form-control' name='quantity" + i + "' value='' id='quantity'></td><td><input type='text' class='form-control' name='rate" + i + "' value='' id='rate'></td><td><input type='text' class='form-control countable' name='amount" + i + "' id='amount' value='' onChange='totalVal();'></td><td><input type='text' class='form-control' name='remarks" + i + "' value=''></td><td><button type='button' class='btn btn-primary' id='remove_row'><i class='fa fa-trash' style='color:white' aria-hidden='true'></i> Delete</button></td>");
+                    $('#table_id').append('<tr id="addr' + (i + 1) + '" class="trRow"></tr>');
+                    i++;
+                });
+            });
+            $(document).ready(function(){
+                $('table').on('click', '#remove_row', function(e){
+                    e.preventDefault();
+                    totalVal();
+                    $(this).parents('tr').remove();
+                    return false;
+                });
+            });
+            $(document).ready(function(){
+                $("#table_id input").keyup(multInputs);
+                function multInputs(){
+                    var mult = 0;
+                    $("tr.trRow").each(function(){
+                        var qty = $('#quantity',this).val();
+                        var rate = $('#rate',this).val();
+                        var total = (qty * 1) * (rate * 1)
+                        $('#amount',this).val(total);
+                        mult += total;
+                    })
+                    $("#sum").html(mult.toFixed(2));
+                }
+            })
+            function totalVal(){
+                var sum = 0;
+                //iterate through each textboxes and add the values
+                $(".countable").each(function() {
+
+                    //add only if the value is number
+                    if(!isNaN(this.value) && this.value.length!=0) {
+                        sum += parseFloat(this.value);
+                    }
+
+                });
+                $("#sum").html(sum.toFixed(2));
+            }
+        </script>
+    </head>
+    <body>
+    <!-- Header starts -->
+    <header class="header-fixed">
+        <div class="header-limiter">
+            <h1><a href="/">Maha<span>Foundation</span></a></h1>
+            <!-- <nav>
+            <a href="/" class="selected">Home</a>
+            <a href="/about-us">About</a>
+            <a href="/faq">FAQ</a>
+            <a href="/contact">Contact</a>
+            </nav> -->
+        </div>
+    </header>
+    <div class="header-fixed-placeholder"></div>
+    <!-- Header ends -->
+
+    <!-- Body starts -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <legend>Invoice</legend>
+            </div>
+        </div>
+        <div class="row add-customer">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary" onclick="document.location.href='/dashboard';"><i class="fa fa-arrow-left" style="color:white" aria-hidden="true"></i> Back</button>
+                <button type="button" style="float:right;" class="btn btn-primary" id="add_row"><i class="fa fa-pencil" style="color:white" aria-hidden="true"></i> Add</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="client">Client:</label>
+                <select  name="client" id="client">
+                    <option value="1">Manikandan</option>
+                    <option value="2">Venkatesan</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <h4 style="text-align: right">Maha foundations pvt ltd</h4>
+                <p style="text-align: right">No-5/754 sabari salai, Madipakkam,Chennai-91</p>
+                <p style="text-align: right">Invoice no-GST/024/18-19</p>
+                <p style="text-align: right">GSTIN-33AAFCM0152P1ZG</p>	
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="table_id" class="display">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Description</th>
+                            <th>Unit</th>
+                            <th>Qty</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                            <th>Remarks</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="addr0" class="trRow">
+                            <td>1</td>
+                            <td><input type="text" class="form-control" name="description" value=""></td>
+                            <td><input type="text" class="form-control" name="unit" value=""></td>
+                            <td><input type="text" class="form-control" name="quantity" value="" id="quantity"></td>
+                            <td><input type="text" class="form-control" name="rate" value="" id="rate"></td>
+                            <td><input type="text" class="form-control countable" name="amount1" id="amount" onChange="totalVal();" value=""></td>
+                            <td><input type="text" class="form-control" name="remarks" value=""></td>
+                            <td><button type="button" class="btn btn-primary" id="remove_row"><i class="fa fa-trash" style="color:white" aria-hidden="true"></i> Delete</button></td>
+                        </tr>
+                        <tr id="addr1" class="trRow"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+                <p style="text-align: right">Amount: <span id="sum">0</span></p>
+            </div>
+        </div>
+    </div>
+    <!-- Body ends -->
+
+    <!-- Footer starts -->
+    <footer class="footer-fixed">
+        <div class="footer-limiter">
+            <h1>Maha<span>Foundation</span> <br>All rights reserved @2019</h1>
+        </div>
+    </footer>
+    <!-- Footer ends -->
+    </body>
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable();
+        } );
+    </script>
+</html>

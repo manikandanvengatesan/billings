@@ -1,0 +1,32 @@
+.footer-fixed{
+    background-color: #292c2f;
+    box-shadow: 0 1px 1px 0 #ccc;
+    padding: 20px 40px;
+    height: 70px;
+    color: #ffffff;
+    box-sizing: border-box;
+    bottom: 0px;
+    margin-top: 850px;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    -webkit-transition: bottom 0.3s;
+    transition: bottom 0.3s;
+}
+
+.footer-fixed .footer-limiter{
+    max-width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.footer-fixed .footer-limiter h1{
+    float: center;
+    font: normal 16px Cookie, Arial, Helvetica, sans-serif;
+	line-height: 40px;
+    margin: 0;
+}
+
+.footer-fixed .footer-limiter h1 span{
+    color: #5383d3;
+}

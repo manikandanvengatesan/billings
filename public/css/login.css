@@ -1,0 +1,39 @@
+h3.login-heading{
+    text-align: center;
+    padding-top: 50px; 
+}
+
+legend{
+    text-align: center;
+    padding-top: 30px;
+}
+
+.box-part{
+    background:#FFF;
+    border-radius:10px;
+    padding:60px 10px;
+    margin:30px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.text{
+    margin:20px 0px;
+}
+
+.fa{
+     color:#5383d3;
+}
+
+a{
+    text-decoration: none ;
+    color:#292c2f;
+}
+
+a:hover{
+   color:#5383d3;
+   text-decoration:none;
+   cursor:pointer;
+}
+
+.add-customer{
+    padding: 20px 0px;
+}
