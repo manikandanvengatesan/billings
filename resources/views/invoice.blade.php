@@ -13,7 +13,8 @@
                 <button type="button" style="float:right;" class="btn btn-primary" id="add_row"><i class="fa fa-pencil" style="color:white" aria-hidden="true"></i> Add</button>
             </div>
         </div>
-        <form action="/action_page.php" method="post" id="form1">
+        <form action="/createInvoice" method="POST" id="form1">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
             <div class="col-md-6">
                 <label for="client">Client:</label>
@@ -23,6 +24,11 @@
                         <option value="{{$customer->id}}">{{$customer->name}}</option>
                     @endforeach
                 </select>
+                <div class="cus_address">
+                    <p class="mobile"></p>
+                    <p class="email"></p>
+                    <p class="address"></p>
+                </div>
             </div>
             <div class="col-md-6">
                 <h4 style="text-align: right">Maha Foundations Pvt Ltd</h4>
@@ -69,6 +75,7 @@
             <div class="col-md-6">
                 <p style="text-align: right">Amount: <span id="sum">0</span></p>
                 <input type="hidden" class="form-control" id="sumHidden" name="sumHidden" value="">
+                <input type="hidden" class="form-control" id="count" name="count" value="">
             </div>
         </div>
         </form>
@@ -82,5 +89,21 @@
         </div>
     </div>
     <!-- Body ends -->
+    <script>
+ $('#client').on('change',function(e)
+ {
+    console.log($('#client').val());
+    var cus_id = $('#client').val();
 
+    //ajax
+    $.get('/customer/' + cus_id, function (data)
+    {
+        console.log(data.address);
+        $('.address').text("Address : "+data.address);
+        $('.email').text("Email : "+data.email);
+        $('.mobile').text("Mobile : "+data.mobile);
+    });
+
+ });
+ </script>
 @include('footer')

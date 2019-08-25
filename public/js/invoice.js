@@ -45,6 +45,8 @@ $(document).on('click', '#add_row', function(){
         })
         $("#sum").html(mult.toFixed(2));
         $('#sumHidden').val(sum.toFixed(2));
+        var row = $('table#table_id tr:last').index();
+        $('#count').val(row);
     }
 });
 function totalVal(){
@@ -60,5 +62,7 @@ function totalVal(){
     });
     $("#sum").html(sum.toFixed(2));
     $('#sumHidden').val(sum.toFixed(2));
+    var row = $('table#table_id tr:last').index();
+        $('#count').val(row);
 }
 setInterval(function(){totalVal();},200);

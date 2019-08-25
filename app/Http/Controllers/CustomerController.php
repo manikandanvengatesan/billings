@@ -21,6 +21,16 @@ class CustomerController extends Controller
     }
 
     /**
+     * get specific customer data
+     * 
+     * @return Response
+     */
+    function getCustomer(Request $request,$id){
+        $customer = Customer::find($id);
+        return $customer;
+    }
+
+    /**
      * Add customer using this method
      * @param Request customer details
      * 
