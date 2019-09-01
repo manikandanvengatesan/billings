@@ -10,6 +10,9 @@ use App\Invoice;
 use App\InvoiceDetails;
 use Session;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InvoiceCreated;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -78,6 +81,13 @@ class InvoiceController extends Controller
                 }
                 
             }
+            $invoice = DB::table('invoice')
+                        ->join('invoiceDetails', 'invoice.id', '=', 'invoiceDetails.invoice')
+                        ->join('customers', 'invoice.customer', '=', 'customers.id')
+                        ->select('*')
+                        ->where('invoice.id',$invoice->id)
+                        ->get();
+            Mail::to("manikandan.vengatesan@gmail.com")->send(new InvoiceCreated($invoice));
             return redirect('/invoice');
         }
         
