@@ -38,7 +38,7 @@
                             <input type="password" value="m@n!@123" class="form-control" name="password">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" class="btn btn-default buttonColor">Submit</button>
                     </form>
                 </div>
             </div>        

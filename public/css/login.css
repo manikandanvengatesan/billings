@@ -37,3 +37,8 @@ a:hover{
 .add-customer{
     padding: 20px 0px;
 }
+
+.buttonColor{
+    background-color: gray;
+    color: white;
+}

@@ -52,7 +52,7 @@ class AdminController extends Controller
     /**
      * Load the dashboard view.
      *
-     * @return Response
+     * @return View
      */
     function dashboard(Request $request){
         return view('dashboard');

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <legend>Invoice</legend>
+                <legend>Payable</legend>
             </div>
         </div>
         <div class="row add-customer">
@@ -13,15 +13,15 @@
                 <button type="button" style="float:right;" class="btn btn-primary" id="add_row"><i class="fa fa-pencil" style="color:white" aria-hidden="true"></i> Add</button>
             </div>
         </div>
-        <form action="/createInvoice" method="POST" id="form1">
+        <form action="/createPayable" method="POST" id="form1">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
             <div class="col-md-6">
-                <label for="client">Client:</label>
-                <select  name="client" id="client">
-                    <option value="">Select Client</option>
-                    @foreach($customers as $customer)
-                        <option value="{{$customer->id}}">{{$customer->name}}</option>
+                <label for="supplier">Supplier:</label>
+                <select required name="supplier" id="supplier">
+                    <option value="">Select Supplier</option>
+                    @foreach($suppliers as $supplier)
+                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
                     @endforeach
                 </select>
                 <div class="cus_address">
@@ -54,11 +54,11 @@
                     <tbody>
                         <tr id="addr0" class="trRow">
                             <td>1</td>
-                            <td><input type="text" class="form-control" name="description" value=""></td>
-                            <td><input type="text" class="form-control" name="unit" value=""></td>
-                            <td><input type="text" class="form-control" name="quantity" value="" id="quantity"></td>
-                            <td><input type="text" class="form-control" name="rate" value="" id="rate"></td>
-                            <td><input type="text" class="form-control countable" name="amount" id="amount" value="" onChange="totalVal();"></td>
+                            <td><input required type="text" class="form-control" name="description" value=""></td>
+                            <td><input required type="text" class="form-control" name="unit" value=""></td>
+                            <td><input required type="text" class="form-control" name="quantity" value="" id="quantity"></td>
+                            <td><input required type="text" class="form-control" name="rate" value="" id="rate"></td>
+                            <td><input required type="text" class="form-control countable" name="amount" id="amount" value="" onChange="totalVal();"></td>
                             <td><input type="text" class="form-control" name="remarks" value=""></td>
                             <td><button type="button" class="btn btn-danger" id="remove_row"><i class="fa fa-trash" style="color:white" aria-hidden="true"></i> Delete</button></td>
                         </tr>
@@ -89,13 +89,13 @@
     </div>
     <!-- Body ends -->
     <script>
- $('#client').on('change',function(e)
+ $('#supplier').on('change',function(e)
  {
-    console.log($('#client').val());
-    var cus_id = $('#client').val();
+    console.log($('#supplier').val());
+    var cus_id = $('#supplier').val();
 
     //ajax
-    $.get('/customer/' + cus_id, function (data)
+    $.get('/supplier/' + cus_id, function (data)
     {
         console.log(data.address);
         $('.address').text("Address : "+data.address);

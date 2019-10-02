@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var i = 1;
     $("#add_row").click(function() {
-        $('#addr' + i).html("<td>" + (i + 1) + "</td><td><input type='text' class='form-control' name='description" + i + "' value=''></td><td><input type='text' class='form-control' name='unit" + i + "' value=''></td><td><input type='text' class='form-control' name='quantity" + i + "' value='' id='quantity'></td><td><input type='text' class='form-control' name='rate" + i + "' value='' id='rate'></td><td><input type='text' class='form-control countable' name='amount" + i + "' id='amount' value='' onChange='totalVal();'></td><td><input type='text' class='form-control' name='remarks" + i + "' value=''></td><td><button type='button' class='btn btn-primary' id='remove_row'><i class='fa fa-trash' style='color:white' aria-hidden='true'></i> Delete</button></td>");
+        $('#addr' + i).html("<td>" + (i + 1) + "</td><td><input type='text' class='form-control' name='description" + i + "' value=''></td><td><input type='text' class='form-control' name='unit" + i + "' value=''></td><td><input type='text' class='form-control' name='quantity" + i + "' value='' id='quantity'></td><td><input type='text' class='form-control' name='rate" + i + "' value='' id='rate'></td><td><input type='text' class='form-control countable' name='amount" + i + "' id='amount' value='' onChange='totalVal();'></td><td><input type='text' class='form-control' name='remarks" + i + "' value=''></td><td><button type='button' class='btn btn-danger' id='remove_row'><i class='fa fa-trash' style='color:white' aria-hidden='true'></i> Delete</button></td>");
         $('#table_id').append('<tr id="addr' + (i + 1) + '" class="trRow"></tr>');
         i++;
     });
